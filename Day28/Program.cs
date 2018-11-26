@@ -29,7 +29,10 @@ class Day28
 
             string emailID = firstNameEmailID[1];
 
-            names.Add(emailID, firstName);
+            if (!names.ContainsKey(emailID))
+            {
+                names.Add(emailID, firstName);
+            }
         }
 
         DisplayOrderedNames();
@@ -48,6 +51,8 @@ class Day28
                 finalList.Add(item.Value);
             }
         }
+
+        finalList.Sort();
 
         foreach (var name in finalList.OrderBy(n => n))
         {
