@@ -15,7 +15,7 @@ using System;
 class Day28
 {
 
-
+    static Dictionary<string, string> names = new Dictionary<string, string>();
 
     static void Main(string[] args)
     {
@@ -28,6 +28,30 @@ class Day28
             string firstName = firstNameEmailID[0];
 
             string emailID = firstNameEmailID[1];
+
+            names.Add(emailID, firstName);
+        }
+
+        DisplayOrderedNames();
+    }
+
+    private static void DisplayOrderedNames()
+    {
+        var finalList = new List<string>();
+
+        var regex = new Regex(@"^[\w-\.]+@gmail.com");
+
+        foreach (var item in names)
+        {
+            if (regex.IsMatch(item.Key))
+            {
+                finalList.Add(item.Value);
+            }
+        }
+
+        foreach (var name in finalList.OrderBy(n => n))
+        {
+            Console.WriteLine(name);
         }
     }
 }
